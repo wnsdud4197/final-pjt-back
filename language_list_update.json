@@ -1,0 +1,178 @@
+[
+    {
+        "model": "movies.language",
+        "pk": 1,
+        "fields": {
+            "original_language": "de",
+            "kor_language": "독일어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 2,
+        "fields": {
+            "original_language": "pt",
+            "kor_language": "포르투갈어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 3,
+        "fields": {
+            "original_language": "ms",
+            "kor_language": "말레이어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 4,
+        "fields": {
+            "original_language": "sv",
+            "kor_language": "스웨덴어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 5,
+        "fields": {
+            "original_language": "tr",
+            "kor_language": "터키어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 6,
+        "fields": {
+            "original_language": "pl",
+            "kor_language": "폴란드어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 7,
+        "fields": {
+            "original_language": "da",
+            "kor_language": "덴마크어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 8,
+        "fields": {
+            "original_language": "zh",
+            "kor_language": "광둥어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 9,
+        "fields": {
+            "original_language": "cn",
+            "kor_language": "중국어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 10,
+        "fields": {
+            "original_language": "fr",
+            "kor_language": "프랑스어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 11,
+        "fields": {
+            "original_language": "la",
+            "kor_language": "라틴어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 12,
+        "fields": {
+            "original_language": "no",
+            "kor_language": "노르웨이어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 13,
+        "fields": {
+            "original_language": "ru",
+            "kor_language": "러시아어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 14,
+        "fields": {
+            "original_language": "en",
+            "kor_language": "영어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 15,
+        "fields": {
+            "original_language": "hi",
+            "kor_language": "힌디어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 16,
+        "fields": {
+            "original_language": "nl",
+            "kor_language": "네덜란드어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 17,
+        "fields": {
+            "original_language": "ko",
+            "kor_language": "한국어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 18,
+        "fields": {
+            "original_language": "it",
+            "kor_language": "이탈리아어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 19,
+        "fields": {
+            "original_language": "es",
+            "kor_language": "스페인어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 20,
+        "fields": {
+            "original_language": "ja",
+            "kor_language": "일본어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 21,
+        "fields": {
+            "original_language": "fi",
+            "kor_language": "핀란드어"
+        }
+    },
+    {
+        "model": "movies.language",
+        "pk": 22,
+        "fields": {
+            "original_language": "th",
+            "kor_language": "태국어"
+        }
+    }
+]

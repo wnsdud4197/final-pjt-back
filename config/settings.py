@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Third-party packages
     'rest_framework',
     'corsheaders',
+    'django_seed',
 
     # Django core packages
     'django.contrib.admin',
@@ -131,6 +132,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -138,3 +141,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
+
+# USER
+AUTH_USER_MODEL = 'accounts.User'
+
+
+# media
+MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_URL = '/media/' 
