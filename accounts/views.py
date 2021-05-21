@@ -12,12 +12,11 @@ from .serializers import UserSerializer
 def signup(request):
     password = request.data.get('password')
     password_confirmation = request.data.get('password_confirmation')
-
+    
     if password != password_confirmation:
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
     serializer = UserSerializer(data=request.data)
-    print(serializer)
     if serializer.is_valid(raise_exception=True):
         user = serializer.save()
         user.set_password(request.data.get('password'))
