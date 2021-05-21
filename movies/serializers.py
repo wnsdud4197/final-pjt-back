@@ -21,4 +21,4 @@ class LanguageSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Language
-        fields = ('original_language', 'name', 'movie_count')
+        fields = ('id', 'original_language', 'name', 'movie_count')

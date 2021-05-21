@@ -11,8 +11,16 @@ from .models import Movie, Genre, Language
 
 @api_view(['GET'])
 def movie_list(request):
-    movie_list = Movie.objects.all()
+    params = request.GET
+    if params.get('genre'):
+        genre_id = params.get('genre')
+        genre = Genre.objects.get(id=genre_id)
+        movie_list = genre.movie_set.all()
+    elif params.get('language'):
+        language_params = params.get('language')
+        movie_list = Movie.objects.filter(language_id=language_params)
     serializer = MovieSerializer(movie_list, many=True)
+    print(len(movie_list))
     return Response(data=serializer.data)
 
 
