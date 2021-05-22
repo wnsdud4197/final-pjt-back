@@ -22,3 +22,7 @@ def signup(request):
         user.set_password(request.data.get('password'))
         user.save()
         return Response(data=serializer.data)
+
+
+# def userinfo(request):
+#     print(request)
