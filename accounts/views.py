@@ -1,10 +1,9 @@
 from rest_framework import status
-from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.serializers import Serializer
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, LoginUserSerializer
+from .models import User
 
 
 # Create your views here.
@@ -15,6 +14,7 @@ def signup(request):
     
     if password != password_confirmation:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+    print(request.data)
     
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
@@ -24,5 +24,9 @@ def signup(request):
         return Response(data=serializer.data)
 
 
-# def userinfo(request):
-#     print(request)
+@api_view(['GET'])
+def userinfo(request):
+    user = User.objects.get(username=request.user)
+    serializer = LoginUserSerializer(user)
+    return Response(data=serializer.data)
+

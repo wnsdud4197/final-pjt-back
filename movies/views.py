@@ -1,5 +1,4 @@
-from django.http import response
-from rest_framework import serializers, status
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -20,7 +19,7 @@ def movie_list(request):
         language_params = params.get('language')
         movie_list = Movie.objects.filter(language_id=language_params)
     serializer = MovieSerializer(movie_list, many=True)
-    print(len(movie_list))
+    
     return Response(data=serializer.data)
 
 
