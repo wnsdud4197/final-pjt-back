@@ -7,4 +7,5 @@ urlpatterns = [
     path('languages/', views.language_list),
     path('movierandom/', views.movie_random),
     path('image/', views.vision_ai),
+    path('labels/', views.vision_movie_list),
 ]

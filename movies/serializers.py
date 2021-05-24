@@ -23,8 +23,16 @@ class LanguageSerializer(serializers.ModelSerializer):
         model = Language
         fields = ('id', 'original_language', 'name', 'movie_count')
 
-class VisionSerializer(serializers.ModelSerializer):
 
+class VisionSerializer(serializers.ModelSerializer):
+    score = serializers.FloatField()
     class Meta:
         model = Vision
         fields = ('label', 'score',)
+
+
+class VisionListSerializer(serializers.ModelSerializer):
+    movie = MovieSerializer(many=True)
+    class Meta:
+        model = Vision
+        fields = ('label', 'movie',)
