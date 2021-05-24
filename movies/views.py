@@ -1,13 +1,15 @@
 from rest_framework import status
+from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from django.db.models import Count
 
-from .serializers import MovieSerializer, GenreSerializer, LanguageSerializer, VisionSerializer, VisionListSerializer
+from .serializers import LikeSerializer, MovieSerializer, GenreSerializer, LanguageSerializer, VisionSerializer, VisionListSerializer, LikeSerializer
 from .models import Movie, Genre, Language, Vision
 
 import os
+from django.shortcuts import get_object_or_404
 
 # vision api
 from google.cloud import vision
@@ -73,6 +75,24 @@ def vision_ai(request):
     serializer = VisionSerializer(labels, many=True)
     return Response(data=serializer.data)
 
+<<<<<<< movies/views.py
+
+@api_view(['POST'])
+def like(request):
+    movie_id = request.data.get('id')
+    movie = get_object_or_404(Movie, id=movie_id)
+    if movie.like_users.filter(pk=request.user.pk).exists():
+        movie.like_users.remove(request.user)
+        check = False
+    else:
+        movie.like_users.add(request.user)
+        check = True
+
+    like = {}
+    like['check'] = check
+
+    serializer = LikeSerializer(like)
+=======
 @api_view(['POST'])
 def vision_movie_list(request):
     r_data = request.data
@@ -89,4 +109,5 @@ def vision_movie_list(request):
         movie_list.append(label_dic)
     
     serializer = VisionListSerializer(movie_list, many=True)
+>>>>>>> movies/views.py
     return Response(data=serializer.data)

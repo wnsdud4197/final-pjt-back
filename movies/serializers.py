@@ -1,3 +1,4 @@
+from django.db.models import fields
 from rest_framework import serializers
 from .models import Movie, Genre, Language, Vision
 
@@ -36,3 +37,10 @@ class VisionListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vision
         fields = ('label', 'movie',)
+
+class LikeSerializer(serializers.ModelSerializer):
+    check = serializers.BooleanField()
+
+    class Meta:
+        model = Movie
+        fields = ('check',)
