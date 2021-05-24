@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Genre, Language
+from .models import Movie, Genre, Language, Vision
 
 class MovieSerializer(serializers.ModelSerializer):
     
@@ -22,3 +22,9 @@ class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Language
         fields = ('id', 'original_language', 'name', 'movie_count')
+
+class VisionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Vision
+        fields = ('label', 'score',)
