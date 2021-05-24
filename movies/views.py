@@ -1,14 +1,16 @@
 from rest_framework import status
+from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from django.db.models import Count
 from rest_framework.serializers import Serializer
 
-from .serializers import MovieSerializer, GenreSerializer, LanguageSerializer, VisionSerializer
+from .serializers import LikeSerializer, MovieSerializer, GenreSerializer, LanguageSerializer, VisionSerializer, LikeSerializer
 from .models import Movie, Genre, Language
 
 import os
+from django.shortcuts import get_object_or_404
 
 from google.cloud import vision
 from google.cloud.vision_v1 import types
@@ -45,9 +47,7 @@ def language_list(request):
 @api_view(['GET'])
 def movie_random(request):
     movie = Movie.objects.order_by('?')[0]
-    print(movie)
     serializer = MovieSerializer(movie)
-    print(serializer)
     return Response(data=serializer.data)
 
 
@@ -74,4 +74,22 @@ def vision_ai(request):
         labels.append(labelfor)
 
     serializer = VisionSerializer(labels, many=True)
+    return Response(data=serializer.data)
+
+
+@api_view(['POST'])
+def like(request):
+    movie_id = request.data.get('id')
+    movie = get_object_or_404(Movie, id=movie_id)
+    if movie.like_users.filter(pk=request.user.pk).exists():
+        movie.like_users.remove(request.user)
+        check = False
+    else:
+        movie.like_users.add(request.user)
+        check = True
+
+    like = {}
+    like['check'] = check
+
+    serializer = LikeSerializer(like)
     return Response(data=serializer.data)
