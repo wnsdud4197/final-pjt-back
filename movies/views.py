@@ -75,8 +75,7 @@ def vision_ai(request):
     serializer = VisionSerializer(labels, many=True)
     return Response(data=serializer.data)
 
-<<<<<<< movies/views.py
-
+    
 @api_view(['POST'])
 def like(request):
     movie_id = request.data.get('id')
@@ -92,7 +91,9 @@ def like(request):
     like['check'] = check
 
     serializer = LikeSerializer(like)
-=======
+    return Response(data=serializer.data)
+
+
 @api_view(['POST'])
 def vision_movie_list(request):
     r_data = request.data
@@ -109,5 +110,4 @@ def vision_movie_list(request):
         movie_list.append(label_dic)
     
     serializer = VisionListSerializer(movie_list, many=True)
->>>>>>> movies/views.py
     return Response(data=serializer.data)
