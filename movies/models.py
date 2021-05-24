@@ -27,3 +27,9 @@ class Review(models.Model):
     rank = models.FloatField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+class Vision(models.Model):
+    label = models.CharField(max_length=20)
+    score = models.FloatField()
+    movie = models.ManyToManyField(Movie)
+    
