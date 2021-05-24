@@ -4,14 +4,14 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from django.db.models import Count
-from rest_framework.serializers import Serializer
 
-from .serializers import LikeSerializer, MovieSerializer, GenreSerializer, LanguageSerializer, VisionSerializer, LikeSerializer
-from .models import Movie, Genre, Language
+from .serializers import LikeSerializer, MovieSerializer, GenreSerializer, LanguageSerializer, VisionSerializer, VisionListSerializer, LikeSerializer
+from .models import Movie, Genre, Language, Vision
 
 import os
 from django.shortcuts import get_object_or_404
 
+# vision api
 from google.cloud import vision
 from google.cloud.vision_v1 import types
 
@@ -56,7 +56,7 @@ def vision_ai(request):
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './hazel-cipher-314701-3c5c06b3d6d5.json'
     # Instantiates a client
     client = vision.ImageAnnotatorClient()
-    #set this thumbnail as the url
+    
     image = types.Image()
     # image.source.image_uri = 'https://i.ytimg.com/vi/UQQHSbeIaB0/maxresdefault.jpg'
     image = request.data.get('image')
@@ -66,7 +66,6 @@ def vision_ai(request):
 
     labels = []
     for label in response_label.label_annotations:
-        # print({'label': label.description, 'score': label.score})
         labelfor = {}
         labelfor['label'] = label.description
         labelfor['score'] = label.score
@@ -76,6 +75,7 @@ def vision_ai(request):
     serializer = VisionSerializer(labels, many=True)
     return Response(data=serializer.data)
 
+<<<<<<< movies/views.py
 
 @api_view(['POST'])
 def like(request):
@@ -92,4 +92,22 @@ def like(request):
     like['check'] = check
 
     serializer = LikeSerializer(like)
+=======
+@api_view(['POST'])
+def vision_movie_list(request):
+    r_data = request.data
+    movie_list = []
+    for label in r_data:
+        label_name =label.get('label')
+        vision = Vision.objects.get(label=label_name)
+        movies = vision.movie.all().order_by('vote_average')[:5]
+        
+        label_dic = {
+            'label': label_name,
+            'movie': movies
+        }
+        movie_list.append(label_dic)
+    
+    serializer = VisionListSerializer(movie_list, many=True)
+>>>>>>> movies/views.py
     return Response(data=serializer.data)

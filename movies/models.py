@@ -30,6 +30,5 @@ class Review(models.Model):
 
 class Vision(models.Model):
     label = models.CharField(max_length=20)
-    score = models.FloatField()
     movie = models.ManyToManyField(Movie)
     
