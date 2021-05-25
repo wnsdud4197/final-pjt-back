@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .serializers import UserSerializer, LoginUserSerializer
+from .serializers import UserSerializer, LoginUserSerializer, UserKeepLikeSerializer, MovieCheckSerializer
 from .models import User
 
 
@@ -30,3 +30,29 @@ def userinfo(request):
     serializer = LoginUserSerializer(user)
     return Response(data=serializer.data)
 
+
+@api_view(['GET'])
+def user_keep_like(request):
+    user = request.user
+    serializer = UserKeepLikeSerializer(user)
+    return Response(data=serializer.data)
+
+
+@api_view(['POST'])
+def movie_check(request):
+    movie_id = request.data.get('id')
+    keep_check = False
+    like_check = False
+    for keep_movie in request.user.keep_movies.all():
+        if keep_movie.id == movie_id:
+            keep_check = True
+    for like_movie in request.user.like_movies.all():
+        if like_movie.id == movie_id:
+            like_check = True
+    check = {}
+    check['keep_check'] = keep_check
+    check['like_check'] = like_check
+    serializer = MovieCheckSerializer(check)
+    return Response(data=serializer.data)
+    
+    
