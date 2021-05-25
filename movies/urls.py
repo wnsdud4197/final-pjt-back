@@ -10,4 +10,5 @@ urlpatterns = [
     path('labels/', views.vision_movie_list),
     path('like/', views.like),
     path('keep/', views.keep),
+    path('search/', views.search),
 ]
