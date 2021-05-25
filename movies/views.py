@@ -1,3 +1,4 @@
+import re
 from rest_framework import status
 from rest_framework import serializers
 from rest_framework.response import Response
@@ -5,7 +6,8 @@ from rest_framework.decorators import api_view
 
 from django.db.models import Count
 
-from .serializers import LikeSerializer, MovieSerializer, GenreSerializer, LanguageSerializer, VisionSerializer, VisionListSerializer, LikeSerializer
+from .serializers import (LikeSerializer, MovieSerializer, GenreSerializer, LanguageSerializer, 
+                            VisionSerializer, VisionListSerializer, LikeSerializer, KeepSerializer)
 from .models import Movie, Genre, Language, Vision
 
 import os
@@ -75,24 +77,25 @@ def vision_ai(request):
     serializer = VisionSerializer(labels, many=True)
     return Response(data=serializer.data)
 
-<<<<<<< movies/views.py
 
 @api_view(['POST'])
 def like(request):
     movie_id = request.data.get('id')
     movie = get_object_or_404(Movie, id=movie_id)
-    if movie.like_users.filter(pk=request.user.pk).exists():
+    if movie.like_users.filter(id=request.user.id).exists():
         movie.like_users.remove(request.user)
-        check = False
+        check_like = False
     else:
         movie.like_users.add(request.user)
-        check = True
+        check_like = True
 
     like = {}
-    like['check'] = check
+    like['check_like'] = check_like
 
     serializer = LikeSerializer(like)
-=======
+    return Response(data=serializer.data)
+    
+
 @api_view(['POST'])
 def vision_movie_list(request):
     r_data = request.data
@@ -109,5 +112,21 @@ def vision_movie_list(request):
         movie_list.append(label_dic)
     
     serializer = VisionListSerializer(movie_list, many=True)
->>>>>>> movies/views.py
+    return Response(data=serializer.data)
+
+
+@api_view(['POST'])
+def keep(request):
+    movie_id = request.data.get('id')
+    movie = get_object_or_404(Movie, id=movie_id)
+    if movie.keep_users.filter(id=request.user.id).exists():
+        movie.keep_users.remove(request.user)
+        check_keep = False
+    else:
+        movie.keep_users.add(request.user)
+        check_keep = True
+    
+    keep = {}
+    keep['check_keep'] = check_keep
+    serializer = KeepSerializer(keep)
     return Response(data=serializer.data)

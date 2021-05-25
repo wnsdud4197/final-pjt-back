@@ -39,8 +39,15 @@ class VisionListSerializer(serializers.ModelSerializer):
         fields = ('label', 'movie',)
 
 class LikeSerializer(serializers.ModelSerializer):
-    check = serializers.BooleanField()
+    check_like = serializers.BooleanField()
 
     class Meta:
         model = Movie
-        fields = ('check',)
+        fields = ('check_like',)
+
+class KeepSerializer(serializers.ModelSerializer):
+    check_keep = serializers.BooleanField()
+
+    class Meta:
+        model = Movie
+        fields = ('check_keep',)
