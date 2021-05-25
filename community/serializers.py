@@ -1,3 +1,4 @@
+from django.db.models import fields
 from movies.models import Movie
 from movies.serializers import MovieSerializer
 from rest_framework import serializers
@@ -19,6 +20,13 @@ class CommunityListSerializer(serializers.ModelSerializer):
 class CommunityDetailSerializer(serializers.ModelSerializer):
     movie = MovieSerializer()
     
+    class Meta:
+        model = Community
+        fields = '__all__'
+
+
+class CommunityUpdateSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Community
         fields = '__all__'
