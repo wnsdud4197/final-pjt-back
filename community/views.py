@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from movies.serializers import MovieSerializer
 from movies.models import Movie
 from rest_framework import serializers, status
@@ -23,3 +24,10 @@ def community_list(request):
         serializer = CommunityListSerializer(community, many=True)
         return Response(data=serializer.data)
     
+
+@api_view(['POST'])
+def community_detail(request):
+    movie_id = request.data.get('id')
+    articles = Community.objects.filter(movie_id=movie_id)
+    serializer = CommunityDetailSerializer(articles, many=True)
+    return Response(data=serializer.data)
