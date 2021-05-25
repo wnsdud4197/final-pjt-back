@@ -134,3 +134,11 @@ def keep(request):
     keep['check_keep'] = check_keep
     serializer = KeepSerializer(keep)
     return Response(data=serializer.data)
+
+
+@api_view(['GET'])
+def search(request):
+    user_input = request.GET.get('word')
+    movies = Movie.objects.filter(title__icontains=user_input)[:20]
+    serializer = MovieSerializer(movies, many=True)
+    return Response(data=serializer.data)
