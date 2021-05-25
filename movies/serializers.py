@@ -2,8 +2,16 @@ from django.db.models import fields
 from rest_framework import serializers
 from .models import Movie, Genre, Language, Vision
 
-class MovieSerializer(serializers.ModelSerializer):
+class LanguageNameSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source="kor_language")
     
+    class Meta:
+        model = Language
+        fields = ('id', 'name',)
+
+class MovieSerializer(serializers.ModelSerializer):
+    language = LanguageNameSerializer()
+
     class Meta:
         model = Movie
         fields = '__all__'

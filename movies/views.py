@@ -100,13 +100,17 @@ def vision_movie_list(request):
     movie_list = []
     for label in r_data:
         label_name =label.get('label')
-        vision = Vision.objects.get(label=label_name)
-        movies = vision.movie.all().order_by('vote_average')[:5]
-        
+        vision = Vision.objects.filter(label=label_name)
+        if vision:
+            movies = vision[0].movie.all().order_by('vote_average')[:5]
+        else:
+            movies = []
+            
         label_dic = {
             'label': label_name,
             'movie': movies
         }
+
         movie_list.append(label_dic)
     
     serializer = VisionListSerializer(movie_list, many=True)
