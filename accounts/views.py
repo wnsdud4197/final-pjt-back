@@ -18,7 +18,9 @@ def signup(request):
     
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
+        # print(serializer.initial_data)
         user = serializer.save()
+        # user.image = serializer.initial_data.get('image')
         user.set_password(request.data.get('password'))
         user.save()
         return Response(data=serializer.data)
