@@ -8,4 +8,7 @@ urlpatterns = [
     # GET, PUT, DELETE
     path('<int:article_id>/', views.community_detail),
 
+    # GET, POST
+    path('<int:article_id>/comments/', views.comments_list),
+
 ]
