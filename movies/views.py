@@ -27,9 +27,16 @@ def movie_list(request):
     elif params.get('language'):
         language_params = params.get('language')
         movie_list = Movie.objects.filter(language_id=language_params)
+    elif params.get('movieId'):
+        movieId = params.get('movieId')
+        movie_list = Movie.objects.get(pk=movieId)
+    
     serializer = MovieSerializer(movie_list, many=True)
     
     return Response(data=serializer.data)
+
+
+
 
 
 @api_view(['GET'])
