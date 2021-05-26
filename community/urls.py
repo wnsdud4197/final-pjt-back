@@ -10,5 +10,5 @@ urlpatterns = [
 
     # GET, POST
     path('<int:article_id>/comments/', views.comments_list),
-
+    path('comments/<int:comment_id>/', views.comment_detail),
 ]

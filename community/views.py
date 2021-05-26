@@ -5,8 +5,15 @@ from rest_framework.decorators import api_view
 
 from django.shortcuts import get_object_or_404
 
-from .serializers import CommunitySerializer, CommunityListSerializer, CommunityDetailSerializer, CommunityUpdateSerializer, CommentSerializer
-from .models import Community
+from .serializers import (
+                            CommunitySerializer,
+                            CommunityListSerializer,
+                            CommunityDetailSerializer,
+                            CommunityUpdateSerializer,
+                            CommentSerializer,
+                            CommentCreateSerializer
+                        )
+from .models import Community, Comment
 
 @api_view(['GET', 'POST'])
 def community_list(request):
@@ -36,7 +43,7 @@ def detail(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def community_detail(request, article_id):
     article = get_object_or_404(Community, id=article_id)
-    comments = article.comment_set.all()
+
     if request.method == 'GET':
         serializer = CommunityDetailSerializer(article)
         return Response(serializer.data)
@@ -57,8 +64,31 @@ def community_detail(request, article_id):
 @api_view(['GET', 'POST'])
 def comments_list(request, article_id):
     community = get_object_or_404(Community, id=article_id)
+    print(request.data)
     if request.method == 'POST':
-        serializer = CommentSerializer(data=request.data)
+        serializer = CommentCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user, community=community)
             return Response(data=serializer.data)
+
+    if request.method == 'GET':
+        comments = community.comment_set.all()
+        serializer = CommentSerializer(comments, many=True)
+        return Response(data=serializer.data)
+
+
+@api_view(['PUT', 'DELETE'])
+def comment_detail(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    if request.method == 'PUT':
+        serializer = CommunityUpdateSerializer(
+            data=request.data, instance=comment
+        )
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(data=serializer.data)
+
+    elif request.method == 'DELETE':
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
