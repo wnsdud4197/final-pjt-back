@@ -14,6 +14,7 @@ class CommunitySerializer(serializers.ModelSerializer):
 
 class CommunityListSerializer(serializers.ModelSerializer):
     movie = MovieSerializer()
+    user = UserSerializer()
 
     class Meta:
         model = Community
