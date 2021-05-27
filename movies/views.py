@@ -111,9 +111,9 @@ def vision_movie_list(request):
         label_name =label.get('label')
         vision = Vision.objects.filter(label=label_name)
         if vision:
-            movies = vision[0].movie.all().order_by('vote_average')[:5]
+            movies = vision[0].movie.all().order_by('vote_average')[:4]
         else:
-            movies = []
+            continue
             
         label_dic = {
             'label': label_name,
