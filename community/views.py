@@ -43,7 +43,7 @@ def detail(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def community_detail(request, article_id):
     article = get_object_or_404(Community, id=article_id)
-
+    
     if request.method == 'GET':
         serializer = CommunityDetailSerializer(article)
         return Response(serializer.data)
@@ -64,7 +64,6 @@ def community_detail(request, article_id):
 @api_view(['GET', 'POST'])
 def comments_list(request, article_id):
     community = get_object_or_404(Community, id=article_id)
-    print(request.data)
     if request.method == 'POST':
         serializer = CommentCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -79,10 +78,11 @@ def comments_list(request, article_id):
 
 @api_view(['PUT', 'DELETE'])
 def comment_detail(request, comment_id):
+    print(request.data)
     comment = get_object_or_404(Comment, id=comment_id)
 
     if request.method == 'PUT':
-        serializer = CommunityUpdateSerializer(
+        serializer = CommentCreateSerializer(
             data=request.data, instance=comment
         )
         if serializer.is_valid(raise_exception=True):
