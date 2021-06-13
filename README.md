@@ -42,17 +42,17 @@
 
 ####  회원 관련 기능
 
-![figma2](figma2.jpg)
+![figma2](./images/figma2.jpg)
 
 #### 영화 관련 기능
 
 
 
-![](figma1.jpg)
+![](./images/figma1.jpg)
 
 #### 커뮤니티 기능
 
-![figma3](figma3.jpg)
+![figma3](./images/figma3.jpg)
 
 
 
@@ -60,7 +60,7 @@
 
 #### vue 컴포넌트 구조
 
-![](vue_components.png)
+![](./images/vue_components.png)
 
 - 21개의 컴포넌트와 10개의 페이지로 vue를 구성하였다.
 
@@ -68,19 +68,19 @@
 
 #### 회원 기능
 
-![](login.jpg)
+![](./images/login.jpg)
 
-![signup](signup.jpg)
+![signup](./images/signup.jpg)
 
 
 
 #### 영화 정보
 
-![](movie_genre.jpg)
+![](./images/movie_genre.jpg)
 
 
 
-![](image_label.jpg)
+![](./images/image_label.jpg)
 
 
 
